@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>niture</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/bootstrap.min.css')}}">
+    <!-- style css -->
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/style.css')}}">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/responsive.css')}}">
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/jquery.mCustomScrollbar.min.css')}}">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<!-- body -->
+
+<body class="main-layout">
+
+    <!-- loader  -->
+    <div class="loader_bg">
+        <div class="loader"><img src="{{url_for('.static', filename='images/loading.gif')}}" alt="#" /></div>
+    </div>
+     <!-- end loader -->
+
+    <div class="wrapper">
+
+       
+        <div class="sidebar">
+         {% include "sidebar.html" %}
+        </div>
+
+        <div id="content">
+            
+            <!-- header -->
+            <header>
+                <!-- header inner -->
+                <div class="header">
+
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-lg-3 logo_section">
+                                <div class="full">
+                                    <div class="center-desk">
+                                        <div class="logo">
+                                            <a href="/"><img src="{{url_for('.static', filename='images/logo.jpg')}}" alt="#"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end header inner -->
+            </header>
+            <!-- end header -->
+
+            <div class="trending">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <div class="title">
+                                <h2>Login <strong class="black">to your account</strong></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-xl-4 offset-lg-4 offset-md-4 col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                            <div>
+                                <form action="/login" method="post" id="login_form">
+                                    <div class="form-outline mb-4">
+                                        <input type="email" name="email" id="email" class="form-control" placeholder="Email"/>
+                                        <span id="wrong_email" style="color: red; display: none;">Unknown email address</span>
+                                    </div>
+
+                                    <div class="form-outline mb-4">
+                                        <input type="password" name="password" id="pass" class="form-control" placeholder="Password" />
+                                        <label id="wrong_password" style="color: red; display: none;">Invalid password</label>
+                                    </div>
+
+                                    <div class="text-center pt-1 mb-5 pb-1">
+                                        <input type="submit" value="Log in" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" style="padding: 15px" type="button">
+                                    </div>
+
+                                    <div class="d-flex align-items-center justify-content-center pb-4">
+                                        <p class="mb-0 me-2">Don't have an account?</p>
+                                        <a type="button" style="margin-left: 10px;" href="/register" class="btn btn-outline-danger">Create new</a>
+                                    </div>
+                                    
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {% include "footer.html" %}
+             
+        </div>
+
+    </div>
+
+    <div class="overlay"></div>
+
+    <!-- Javascript files-->
+    <script src="{{url_for('.static', filename='js/jquery.min.js')}}"></script>
+    <script src="{{url_for('.static', filename='js/popper.min.js')}}"></script>
+    <script src="{{url_for('.static', filename='js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('.static', filename='js/jquery-3.0.0.min.js')}}"></script>
+    <!-- sidebar -->
+    <script src="{{url_for('.static', filename='js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+    <script src="{{url_for('.static', filename='js/custom.js')}}"></script>
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#dismiss, .overlay').on('click', function() {
+                $('#sidebar').removeClass('active');
+                $('.overlay').removeClass('active');
+            });
+
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').addClass('active');
+                $('.overlay').addClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+
+            $("#login_form").submit(function(event){
+                $("#wrong_password").css("display", "none");
+                $("#wrong_email").css("display", "none");
+
+                fetch("./login", {
+                    method: 'post',
+                    body: JSON.stringify({
+                        email: $("#email").val(),
+                        password: $("#pass").val()
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then((response) => {
+                    if (response.status === 200) {
+                        $(location).attr("href", "/");
+                    } else if (response.status == 403) {
+                        $("#wrong_password").css("display", "");
+                    } else if (response.status == 401) {
+                        $("#wrong_email").css("display", "");
+                    }
+                }).catch((error) => {
+                    console.log(error)
+                })
+                event.preventDefault();
+
+            });
+
+        });
+    </script>
+    <script>
+      // This example adds a marker to indicate the position of Bondi Beach in Sydney,
+      // Australia.
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 11,
+          center: {lat: 40.645037, lng: -73.880224},
+          });
+
+      var image = 'images/maps-and-flags.png';
+      var beachMarker = new google.maps.Marker({
+          position: {lat: 40.645037, lng: -73.880224},
+          map: map,
+          icon: image
+        });
+      }
+    </script>
+    <!-- google map js -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eaHt9Dh5H57Zh0xVTqxVdBFCvFMqFjQ&callback=initMap"></script>
+    <!-- end google map js --> 
+    
+</body>
+
+</html>

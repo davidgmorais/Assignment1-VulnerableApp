@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>niture</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/bootstrap.min.css')}}">
+    <!-- style css -->
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/style.css')}}">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/responsive.css')}}">
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/jquery.mCustomScrollbar.min.css')}}">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    
+</head>
+<!-- body -->
+
+<body class="main-layout">
+
+    <!-- loader  -->
+    <div class="loader_bg">
+        <div class="loader"><img src="{{url_for('.static', filename='images/loading.gif')}}" alt="#" /></div>
+    </div>
+     <!-- end loader -->
+
+    <div class="wrapper">
+
+       
+        <div class="sidebar">
+         <!-- Sidebar  -->
+        {% include "sidebar.html" %}
+      </div>
+
+        <div id="content">
+            {% include "header.html" %}
+            
+            <div class="layout_padding-2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="img_box">
+                                {% if product.image %}
+                                    <figure><img src="{{url_for('.static', filename='data/' + product.image)}}" alt="#" /></figure>
+                                {% else %}
+                                    <figure><img src="{{url_for('.static', filename='images/product_default.jpeg')}}" alt="#" /></figure>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 product_detail_side">
+                            <div class="abotext_box">
+                                <div class="product-heading">
+                                    <h2>{{ product.name }}</h2>
+                                </div>
+                                <div class="product-detail-side">
+                                    <span class="new-price">€{{product.price}}</span>
+                                    <span class="rating">
+                     <i class="fa fa-star-o" aria-hidden="true"></i>
+                     <i class="fa fa-star-o" aria-hidden="true"></i>
+                     <i class="fa fa-star-o" aria-hidden="true"></i>
+                     <i class="fa fa-star-o" aria-hidden="true"></i>
+                     <i class="fa fa-star-o" aria-hidden="true"></i>
+                     </span>
+                                    <span class="review">(No customer review yet)</span>
+                                </div>
+                                <div class="detail-contant">
+                                    {{product.description | safe}}
+                                    <form class="cart" >
+                                        <div class="quantity">
+                                            <input step="1" min="1" max="5" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" type="number">
+                                        </div>
+                                        <button class="bt_main">Add to cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="full">
+                                <div class="tab_bar_section">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#reviews">Reviews (0)</a> </li>
+                                    </ul>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div id="reviews" class="tab-pane active" style="text-align: center;">
+                                            <p>We know reviews are important to assess the product quality. This feature will soon be availabe in a next version of the website.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% include "footer.html" %}
+             
+        </div>
+
+    </div>
+
+    <div class="overlay"></div>
+
+    <!-- Javascript files-->
+    <script src="{{url_for('.static', filename='js/jquery.min.js')}}"></script>
+    <script src="{{url_for('.static', filename='js/popper.min.js')}}"></script>
+    <script src="{{url_for('.static', filename='js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('.static', filename='js/jquery-3.0.0.min.js')}}"></script>
+    <!-- sidebar -->
+    <script src="{{url_for('.static', filename='js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+    <script src="{{url_for('.static', filename='js/custom.js')}}"></script>
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".cart").submit(function(event) {
+                event.preventDefault();
+                alert('We\'re sorry, but something went wrong here. Maybe the developer was too lazy to actually implement this function');
+            })
+
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#dismiss, .overlay').on('click', function() {
+                $('#sidebar').removeClass('active');
+                $('.overlay').removeClass('active');
+            });
+
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').addClass('active');
+                $('.overlay').addClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+
+        });
+    </script>
+    <script>
+      // This example adds a marker to indicate the position of Bondi Beach in Sydney,
+      // Australia.
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 11,
+          center: {lat: 40.645037, lng: -73.880224},
+          });
+
+      var image = 'images/maps-and-flags.png';
+      var beachMarker = new google.maps.Marker({
+          position: {lat: 40.645037, lng: -73.880224},
+          map: map,
+          icon: image
+        });
+      }
+    </script>
+    <!-- google map js -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eaHt9Dh5H57Zh0xVTqxVdBFCvFMqFjQ&callback=initMap"></script>
+    <!-- end google map js --> 
+    
+</body>
+
+</html>
