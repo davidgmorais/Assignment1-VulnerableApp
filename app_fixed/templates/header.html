@@ -1,0 +1,74 @@
+<!-- header -->
+<header>
+    <!-- header inner -->
+    <div class="header">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-3 logo_section">
+                    <div class="full">
+                        <div class="center-desk">
+                            <div class="logo">
+                                <a href="/"><img src="{{url_for('.static', filename='images/logo.jpg')}}" alt="#"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="right_header_info">
+                        <ul>
+                            {% if isloggedIn %}
+                                <li>
+                                    <a class="dropdown-toggle" onclick="alert('We\'re sorry, but something went wrong here. Maybe the developer was too lazy to actually implement this function')"><img style="margin-right: 15px;" src="{{url_for('.static', filename='icon/3.png')}}" alt="#"/></a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('add_product') }}"><img style="margin-right: 15px;" src="{{url_for('.static', filename='icon/2.png')}}" alt="#" /></a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a {% if isloggedIn %} class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" href="#"  {% else %} href="/login" {% endif %}><img style="margin-right: 15px;" src="{{url_for('.static', filename='icon/1.png')}}" alt="#" /></a>
+                                <div class="dropdown-menu dropdown-menu-right" style="min-width: 10vw;" aria-labelledby="dropdownMenuLink">
+                                    <div class="row justify-content-center">
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                            <div class="profile">
+                                                <img class="img-responsive" src="{{url_for('.static', filename='images/user_default.png')}}" alt="#">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xl-12" style="text-align: center;">
+                                            <h3>{{ user }}</h3>
+                                        </div>
+                                        {% if user == "admin@gmail.com" %}
+                                            <div class="col-xl-10" style="text-align: center; margin-bottom: 5px;">
+                                                <button class="btn btn-disabled btn-block btn-dark" disabled>Admin panel</button>
+                                            </div>
+                                        {% endif %}
+                                        <div class="col-xl-10" style="text-align: center;">
+                                            <button class="btn btn-disabled btn-block btn-dark" disabled>Settings</button>
+                                        </div>
+                                        <div class="col-xl-10" style="text-align: center;">
+                                            <button href="{{ url_for('index') }}" onclick="logout()" class="btn btn-sucess btn-block">Log out</button>
+                                        </div>           
+
+
+                                    </div>
+                                    
+                                </div>
+                            </li>
+
+                            <li>
+                                <button type="button" id="sidebarCollapse">
+                                    <img src="{{url_for('.static', filename='images/menu_icon.png')}}" alt="#" />
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end header inner -->
+</header>
+<!-- end header -->

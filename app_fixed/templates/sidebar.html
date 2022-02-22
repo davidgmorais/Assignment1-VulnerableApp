@@ -1,0 +1,20 @@
+ <!-- Sidebar  -->
+ <nav id="sidebar">
+
+    <div id="dismiss">
+        <i class="fa fa-arrow-left"></i>
+    </div>
+
+    <ul class="list-unstyled components">
+        
+        <li class="active"> <a href="/">Home</a></li>
+        <li> <a href="#">About</a></li>
+        {% if isloggedIn %}
+        <li> <a href="/addproduct">Add product</a></li>
+        {% endif %}
+        <li> <a href="/product">Products</a></li>
+        <li> <a href="#">Contact us</a></li>
+
+    </ul>
+
+</nav>
